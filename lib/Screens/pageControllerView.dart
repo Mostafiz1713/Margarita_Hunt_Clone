@@ -94,7 +94,7 @@ class _PageControllerState extends State<PageControllerView>
             ],
             labelColor: Themes.Primary,
             unselectedLabelColor: Themes.Primary2,
-            indicatorSize: TabBarIndicatorSize.label,
+            indicatorSize: TabBarIndicatorSize.tab,
             indicatorPadding: EdgeInsets.all(5.0),
             indicatorColor: Themes.Primary2,
           ),
