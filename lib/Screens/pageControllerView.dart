@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:margarita_hunt_clone/Screens/home.dart';
+import 'package:margarita_hunt_clone/Screens/submit&Review.dart';
 import 'package:margarita_hunt_clone/Themes/Themes.dart';
 
 class PageControllerView extends StatefulWidget {
@@ -6,7 +8,18 @@ class PageControllerView extends StatefulWidget {
   _PageControllerState createState() => _PageControllerState();
 }
 
-class _PageControllerState extends State<PageControllerView> {
+class _PageControllerState extends State<PageControllerView>
+    with SingleTickerProviderStateMixin {
+  TabController controller;
+  int index;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = new TabController(length: 2, vsync: this);
+    index = 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,31 +56,49 @@ class _PageControllerState extends State<PageControllerView> {
           ],
         ),
       ),
-      body: Container(
-        child: Center(child: Text('Home')),
-      ),
-      bottomNavigationBar: Container(
-        child: Row(
-          children: [
-            Column(
-              children: [
-                Image.asset('assets/images/home.svg'),
-                Text('About Us'),
-              ],
+      body: DefaultTabController(
+        length: 4,
+        child: new Scaffold(
+          body: TabBarView(
+            children: [
+              Home(),
+              new Container(
+                color: Colors.orange,
+              ),
+              SubmitAndReview(),
+              new Container(
+                color: Colors.red,
+              ),
+            ],
+          ),
+          bottomNavigationBar: new TabBar(
+            labelStyle: TextStyle(
+              fontSize: 8
             ),
-            Column(
-              children: [
-                Image.asset('assets/images/home.svg'),
-                Text('About Us'),
-              ],
-            ),
-            Column(
-              children: [
-                Image.asset('assets/images/home.svg'),
-                Text('About Us'),
-              ],
-            ),
-          ],
+            tabs: [
+              Tab(
+                icon: new Icon(Icons.home),
+                text: 'Home',
+              ),
+              Tab(
+                icon: new Icon(Icons.rss_feed),
+              ),
+              Tab(
+                icon: new Icon(Icons.rate_review),
+                text: 'Submit & Review',
+              ),
+              Tab(
+                icon: Image.asset('assets/images/cup-marker-yellow.png'),
+                text: 'Bertender',
+              )
+            ],
+            labelColor: Themes.Primary,
+            unselectedLabelColor: Themes.Primary2,
+            indicatorSize: TabBarIndicatorSize.label,
+            indicatorPadding: EdgeInsets.all(5.0),
+            indicatorColor: Themes.Primary2,
+          ),
+          backgroundColor: Colors.black,
         ),
       ),
     );
